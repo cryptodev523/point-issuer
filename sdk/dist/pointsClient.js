@@ -8,16 +8,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = __importDefault(require("axios"));
 class PointsClient {
     constructor(apiKey, campaignId) {
         this.apiKey = apiKey;
         this.campaignId = campaignId;
+        this.baseUrl =
+            'https://point-issuer-utility-insc2ttob-cryptodevs-projects-dda7668f.vercel.app/';
     }
     distribute(eventName, pointsData) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //
+                const data = {
+                    eventName,
+                    pointsData,
+                    apiKey: this.apiKey,
+                    campaignId: this.campaignId,
+                };
+                const response = yield axios_1.default.post(`${this.baseUrl}/api/point`, data);
+                return response.data;
             }
             catch (error) {
                 console.error('Error distributing points:', error);
@@ -27,8 +40,14 @@ class PointsClient {
     getPoints(address) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //
-                return 0;
+                const response = yield axios_1.default.get(`${this.baseUrl}/api/point`, {
+                    params: {
+                        address,
+                        apiKey: this.apiKey,
+                        campaignId: this.campaignId,
+                    },
+                });
+                return response.data;
             }
             catch (error) {
                 console.error('Error getting points:', error);
@@ -39,8 +58,15 @@ class PointsClient {
     getPointsByEvent(address, eventName) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //
-                return 0;
+                const response = yield axios_1.default.get(`${this.baseUrl}/api/point`, {
+                    params: {
+                        address,
+                        eventName,
+                        apiKey: this.apiKey,
+                        campaignId: this.campaignId,
+                    },
+                });
+                return response.data;
             }
             catch (error) {
                 console.error('Error getting points by event:', error);
