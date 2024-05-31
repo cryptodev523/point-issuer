@@ -49,7 +49,7 @@ model Point {
     address     String
     points      Int
     createdAt   DateTime    @default(now())
-    metadata    JSONB
+    metadata    Json
 
     project     Project     @relation(fields: [projectId], references: [id])
     event       Event       @relation(fields: [eventId], references: [id])
