@@ -1,57 +1,63 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider = "postgresql"
-    url = env("POSTGRES_PRISMA_URL")
-    directUrl = env("POSTGRES_URL_NON_POOLING")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Project {
-    id          Int         @id @default(autoincrement())
-    name        String
-    createdAt   DateTime    @default(now())
+  id         Int          @id @default(autoincrement())
+  name       String
+  createdAt  DateTime     @default(now())
+  Credential Credential[]
+  Campaign   Campaign[]
+  Event      Event[]
+  Point      Point[]
 }
 
 model Credential {
-    id          Int         @id @default(autoincrement())
-    apiKey      String
-    projectId   Int
-    createdAt   DateTime    @default(now())
+  id        Int      @id @default(autoincrement())
+  apiKey    String
+  projectId Int
+  createdAt DateTime @default(now())
 
-    project     Project     @relation(fields: [projectId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
 }
 
 model Campaign {
-    id          Int         @id @default(autoincrement())
-    projectId   Int
-    name        String
-    createdAt   DateTime    @default(now())
+  id        Int      @id @default(autoincrement())
+  projectId Int
+  name      String
+  createdAt DateTime @default(now())
 
-    project     Project     @relation(fields: [projectId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+  Point   Point[]
 }
 
 model Event {
-    id          Int         @id @default(autoincrement())
-    projectId   Int
-    name        String
-    createdAt   DateTime    @default(now())
+  id        Int      @id @default(autoincrement())
+  projectId Int
+  name      String
+  createdAt DateTime @default(now())
 
-    project     Project     @relation(fields: [projectId], references: [id])
+  project Project @relation(fields: [projectId], references: [id])
+  Point   Point[]
 }
 
 model Point {
-    id          Int         @id @default(autoincrement())
-    campaignId  Int
-    projectId   Int
-    eventId     Int
-    address     String
-    points      Int
-    createdAt   DateTime    @default(now())
-    metadata    Json
+  id         Int      @id @default(autoincrement())
+  campaignId Int
+  projectId  Int
+  eventId    Int
+  address    String
+  points     Int
+  createdAt  DateTime @default(now())
+  metadata   Json
 
-    project     Project     @relation(fields: [projectId], references: [id])
-    event       Event       @relation(fields: [eventId], references: [id])
-    campaign    Campaign    @relation(fields: [campaignId], references: [id])
+  project  Project  @relation(fields: [projectId], references: [id])
+  event    Event    @relation(fields: [eventId], references: [id])
+  campaign Campaign @relation(fields: [campaignId], references: [id])
 }
