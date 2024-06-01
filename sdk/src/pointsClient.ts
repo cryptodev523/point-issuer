@@ -14,7 +14,7 @@ class PointsClient {
     this.apiKey = apiKey;
     this.campaignId = campaignId;
     this.baseUrl =
-      'https://point-issuer-utility-insc2ttob-cryptodevs-projects-dda7668f.vercel.app/';
+      'https://point-issuer-utility-insc2ttob-cryptodevs-projects-dda7668f.vercel.app';
   }
 
   async distribute(eventName: string, pointsData: PointsData): Promise<void> {
