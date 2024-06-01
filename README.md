@@ -68,6 +68,9 @@ npm run dev
 
 Go to 'http://localhost:3000' and input the api key, event name, number of points, address
 
+![image](https://github.com/cryptodev523/point-issuer/assets/3051782/7ce24bfa-1c0d-43cf-8cb9-74af84af278d)
+
+
 ### Deployment
 
 Deploy the application to Vercel:
