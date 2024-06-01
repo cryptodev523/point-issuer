@@ -43,6 +43,9 @@ export async function POST(request: Request) {
       return new Response(JSON.stringify(point), {
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*", // Allow any origin
+          "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
         },
       });
     } else {
@@ -57,6 +60,9 @@ export async function POST(request: Request) {
         status: 500,
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*", // Allow any origin
+          "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
         },
       }
     );
@@ -86,6 +92,10 @@ export async function GET(request: Request) {
           return new Response(JSON.stringify([]), {
             headers: {
               "Content-Type": "application/json",
+              "Access-Control-Allow-Origin": "*", // Allow any origin
+              "Access-Control-Allow-Methods":
+                "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type",
             },
           });
         }
@@ -103,6 +113,9 @@ export async function GET(request: Request) {
       return new Response(JSON.stringify(points), {
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*", // Allow any origin
+          "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
         },
       });
     } else {
@@ -117,6 +130,9 @@ export async function GET(request: Request) {
         status: 500,
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*", // Allow any origin
+          "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+          "Access-Control-Allow-Headers": "Content-Type",
         },
       }
     );
