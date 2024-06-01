@@ -18,16 +18,17 @@ class PointsClient {
         this.apiKey = apiKey;
         this.campaignId = campaignId;
         this.baseUrl =
-            'https://point-issuer-utility-insc2ttob-cryptodevs-projects-dda7668f.vercel.app/';
+            'https://point-issuer-utility-git-fe-e451a0-cryptodevs-projects-dda7668f.vercel.app';
     }
-    distribute(eventName, pointsData) {
-        return __awaiter(this, void 0, void 0, function* () {
+    distribute(eventName_1, pointsData_1) {
+        return __awaiter(this, arguments, void 0, function* (eventName, pointsData, metadata = {}) {
             try {
                 const data = {
                     eventName,
                     pointsData,
                     apiKey: this.apiKey,
                     campaignId: this.campaignId,
+                    metadata,
                 };
                 const response = yield axios_1.default.post(`${this.baseUrl}/api/point`, data);
                 return response.data;
