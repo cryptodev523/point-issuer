@@ -36,7 +36,7 @@ export async function POST(request: Request) {
           points,
           metadata,
           eventId: event.id,
-          campaignId,
+          campaignId: +campaignId,
           projectId,
         },
       });
