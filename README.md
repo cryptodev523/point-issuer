@@ -6,6 +6,8 @@ The project includes an API endpoint for registering API keys and a simple front
 
 ## About SDK
 
+[Check the sdk level README](https://github.com/cryptodev523/point-issuer/blob/main/sdk/README.md).
+
 ## Getting Started
 
 ### Prerequisites
