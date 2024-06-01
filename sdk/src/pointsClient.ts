@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 interface PointsData {
   points: number;
   address: string;
@@ -6,15 +8,33 @@ interface PointsData {
 class PointsClient {
   private apiKey: string;
   private campaignId: string;
+  private baseUrl: string;
 
   constructor(apiKey: string, campaignId: string) {
     this.apiKey = apiKey;
     this.campaignId = campaignId;
+    this.baseUrl =
+      'https://point-issuer-utility-git-fe-e451a0-cryptodevs-projects-dda7668f.vercel.app';
   }
 
-  async distribute(eventName: string, pointsData: PointsData): Promise<void> {
+  async distribute(
+    eventName: string,
+    pointsData: PointsData,
+    metadata = {},
+  ): Promise<void> {
     try {
-      //
+      if (!pointsData.address.startsWith('0x')) {
+        throw new Error('Invalid address');
+      }
+      const data = {
+        eventName,
+        pointsData,
+        apiKey: this.apiKey,
+        campaignId: this.campaignId,
+        metadata,
+      };
+      const response = await axios.post(`${this.baseUrl}/api/point`, data);
+      return response.data;
     } catch (error) {
       console.error('Error distributing points:', error);
     }
@@ -22,8 +42,17 @@ class PointsClient {
 
   async getPoints(address: string): Promise<number> {
     try {
-      //
-      return 0;
+      if (!address.startsWith('0x')) {
+        throw new Error('Invalid address');
+      }
+      const response = await axios.get(`${this.baseUrl}/api/point`, {
+        params: {
+          address,
+          apiKey: this.apiKey,
+          campaignId: this.campaignId,
+        },
+      });
+      return response.data;
     } catch (error) {
       console.error('Error getting points:', error);
       return 0;
@@ -32,8 +61,18 @@ class PointsClient {
 
   async getPointsByEvent(address: string, eventName: string): Promise<number> {
     try {
-      //
-      return 0;
+      if (!address.startsWith('0x')) {
+        throw new Error('Invalid address');
+      }
+      const response = await axios.get(`${this.baseUrl}/api/point`, {
+        params: {
+          address,
+          eventName,
+          apiKey: this.apiKey,
+          campaignId: this.campaignId,
+        },
+      });
+      return response.data;
     } catch (error) {
       console.error('Error getting points by event:', error);
       return 0;

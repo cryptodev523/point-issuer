@@ -1,12 +1,11 @@
 {
   "name": "point-issuer",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest",
-    "prepare": "husky install"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -30,5 +29,12 @@
   },
   "lint-staged": {
     "*.ts": "eslint --fix"
+  },
+  "dependencies": {
+    "axios": "^1.7.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cryptodev523/point-issuer.git"
   }
 }
