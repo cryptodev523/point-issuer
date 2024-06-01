@@ -23,6 +23,9 @@ class PointsClient {
     distribute(eventName_1, pointsData_1) {
         return __awaiter(this, arguments, void 0, function* (eventName, pointsData, metadata = {}) {
             try {
+                if (!pointsData.address.startsWith('0x')) {
+                    throw new Error('Invalid address');
+                }
                 const data = {
                     eventName,
                     pointsData,
@@ -41,6 +44,9 @@ class PointsClient {
     getPoints(address) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                if (!address.startsWith('0x')) {
+                    throw new Error('Invalid address');
+                }
                 const response = yield axios_1.default.get(`${this.baseUrl}/api/point`, {
                     params: {
                         address,
@@ -59,6 +65,9 @@ class PointsClient {
     getPointsByEvent(address, eventName) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                if (!address.startsWith('0x')) {
+                    throw new Error('Invalid address');
+                }
                 const response = yield axios_1.default.get(`${this.baseUrl}/api/point`, {
                     params: {
                         address,

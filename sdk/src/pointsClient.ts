@@ -23,6 +23,9 @@ class PointsClient {
     metadata = {},
   ): Promise<void> {
     try {
+      if (!pointsData.address.startsWith('0x')) {
+        throw new Error('Invalid address');
+      }
       const data = {
         eventName,
         pointsData,
@@ -39,6 +42,9 @@ class PointsClient {
 
   async getPoints(address: string): Promise<number> {
     try {
+      if (!address.startsWith('0x')) {
+        throw new Error('Invalid address');
+      }
       const response = await axios.get(`${this.baseUrl}/api/point`, {
         params: {
           address,
@@ -55,6 +61,9 @@ class PointsClient {
 
   async getPointsByEvent(address: string, eventName: string): Promise<number> {
     try {
+      if (!address.startsWith('0x')) {
+        throw new Error('Invalid address');
+      }
       const response = await axios.get(`${this.baseUrl}/api/point`, {
         params: {
           address,

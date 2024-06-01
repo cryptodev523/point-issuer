@@ -14,21 +14,29 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-const sdkClient = new PointsClient("99df6ab8254e543fa63e408bd780ebec", "1");
-
 export function PointSetter() {
+  const [apiKey, setApiKey] = useState("");
   const [eventName, setEventName] = useState("");
   const [points, setPoints] = useState("");
   const [address, setAddress] = useState("");
 
   const handleSubmit = async () => {
     try {
-      if (points && address) {
-        const response = await sdkClient.distribute(eventName, {
-          address,
-          points: parseInt(points),
-        });
-        console.log(response);
+      if (apiKey && eventName && points && address) {
+        const sdkClient = new PointsClient(apiKey, "1");
+
+        const response = await sdkClient.distribute(
+          eventName,
+          {
+            address,
+            points: parseInt(points),
+          },
+          {
+            author: "jordan",
+          }
+        );
+
+        alert("Points distributed successfully");
       }
     } catch (error) {
       console.error(error);
@@ -45,6 +53,16 @@ export function PointSetter() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className="grid gap-2">
+            <Label htmlFor="api-key">Api Key</Label>
+            <Input
+              id="api-key"
+              placeholder="Enter the api key"
+              type="text"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+            />
+          </div>
           <div className="grid gap-2">
             <Label htmlFor="event-name">Event Name</Label>
             <Input
